@@ -77,7 +77,7 @@ func (s *Shell) Run() error {
 			line = "--help"
 		}
 
-		args := strings.Fields(line)
+		args := splitArgs(line)
 		if err := s.execute(args); err != nil {
 			color.New(color.FgRed).Fprintf(os.Stderr, "Error: %s\n", err)
 		}
@@ -87,6 +87,35 @@ func (s *Shell) Run() error {
 func promptString() string {
 	return color.New(color.FgGreen, color.Bold).Sprint("etoro") +
 		color.New(color.FgWhite).Sprint("> ")
+}
+
+// splitArgs tokenizes a command line, respecting quoted strings.
+func splitArgs(line string) []string {
+	var args []string
+	var current strings.Builder
+	inSingle := false
+	inDouble := false
+
+	for i := 0; i < len(line); i++ {
+		ch := line[i]
+		switch {
+		case ch == '\'' && !inDouble:
+			inSingle = !inSingle
+		case ch == '"' && !inSingle:
+			inDouble = !inDouble
+		case ch == ' ' && !inSingle && !inDouble:
+			if current.Len() > 0 {
+				args = append(args, current.String())
+				current.Reset()
+			}
+		default:
+			current.WriteByte(ch)
+		}
+	}
+	if current.Len() > 0 {
+		args = append(args, current.String())
+	}
+	return args
 }
 
 func (s *Shell) buildCompletionTree() []readline.PrefixCompleterInterface {
