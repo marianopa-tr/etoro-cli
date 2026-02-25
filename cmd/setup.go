@@ -34,7 +34,7 @@ Examples:
 
 		dim := color.New(color.Faint)
 		dim.Fprintln(os.Stderr, "  Get your API key from the eToro developer portal.")
-		dim.Fprintln(os.Stderr, "  https://www.etoro.com/api/")
+		dim.Fprintln(os.Stderr, "  https://www.etoro.com/settings/trade")
 		fmt.Fprintln(os.Stderr)
 
 		apiKey := wizardPrompt("API Key", cfg.Auth.APIKey, true)
