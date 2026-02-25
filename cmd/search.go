@@ -59,7 +59,7 @@ func instrumentToRow(inst api.Instrument) output.InstrumentRow {
 		Price:      inst.CurrentRate,
 		DailyChg:   inst.DailyPriceChange,
 		WeeklyChg:  inst.WeeklyPriceChange,
-		Open:       inst.IsExchangeOpen,
+		Open:       inst.IsCurrentlyTradable,
 		Tradable:   inst.IsCurrentlyTradable,
 		Popularity: inst.Popularity7Day,
 	}

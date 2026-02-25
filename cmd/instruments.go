@@ -82,7 +82,7 @@ var instrumentsGetCmd = &cobra.Command{
 			MonthlyChg:    inst.MonthlyPriceChange,
 			ThreeMonthChg: inst.ThreeMonthPriceChange,
 			OneYearChg:    inst.OneYearPriceChange,
-			Open:          inst.IsExchangeOpen,
+			Open:          inst.IsCurrentlyTradable,
 			Tradable:      inst.IsCurrentlyTradable,
 			BuyEnabled:    inst.IsBuyEnabled,
 			Popularity:    inst.Popularity7Day,

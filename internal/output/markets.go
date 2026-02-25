@@ -91,7 +91,6 @@ func PrintInstrumentDetail(inst InstrumentDetail, format Format) {
 	DetailRow(t, "3-Month Change", FormatPercent(inst.ThreeMonthChg))
 	DetailRow(t, "1-Year Change", FormatPercent(inst.OneYearChg))
 	DetailRow(t, "Market Status", FormatBool(inst.Open, "Open", "Closed"))
-	DetailRow(t, "Tradable", FormatBool(inst.Tradable, "Yes", "No"))
 	DetailRow(t, "Buy Enabled", FormatBool(inst.BuyEnabled, "Yes", "No"))
 	DetailRow(t, "Popularity (7d)", inst.Popularity)
 	RenderTable(t)
