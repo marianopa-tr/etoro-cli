@@ -49,7 +49,7 @@ func (r *Resolver) Resolve(symbolOrID string) (int, string, error) {
 		}
 	}
 
-	resp, err := r.client.SearchInstruments(symbolOrID, 1, 10)
+	resp, err := r.client.SearchInstruments(symbolOrID, 1, 50)
 	if err != nil {
 		return 0, "", fmt.Errorf("searching for %q: %w", symbolOrID, err)
 	}

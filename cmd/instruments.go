@@ -51,7 +51,7 @@ var instrumentsGetCmd = &cobra.Command{
 				DisplayName:  dd.DisplayName,
 			}
 		} else {
-			resp, err := client.SearchInstruments(query, 1, 10)
+			resp, err := client.SearchInstruments(query, 1, 50)
 			if err != nil {
 				return err
 			}
