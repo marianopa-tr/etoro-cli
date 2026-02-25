@@ -8,7 +8,7 @@ import (
 
 // Set via -ldflags at build time; see Makefile.
 var (
-	version = "dev"
+	version = "0.1.0"
 	commit  = "none"
 	date    = "unknown"
 )
@@ -23,4 +23,6 @@ var versionCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(versionCmd)
+	rootCmd.Version = version
+	rootCmd.SetVersionTemplate("etoro {{.Version}}\n")
 }

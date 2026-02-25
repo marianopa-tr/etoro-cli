@@ -14,7 +14,7 @@ and trader analytics.
 
 Examples:
   etoro pi copiers
-  etoro pi get MarianoPardo
+  etoro pi get BigTech
   etoro pi get trader123 --period CurrYear
   etoro pi gain trader123`,
 }
@@ -59,7 +59,7 @@ Periods: CurrMonth, CurrQuarter, CurrYear, LastYear, LastTwoYears,
          OneMonthAgo, TwoMonthsAgo, ThreeMonthsAgo, SixMonthsAgo, OneYearAgo
 
 Examples:
-  etoro pi get MarianoPardo
+  etoro pi get BigTech
   etoro pi get trader123 --period CurrYear`,
 	Args: cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
@@ -110,7 +110,7 @@ var piGainCmd = &cobra.Command{
 	Long: `Display historical monthly and yearly performance data for a trader.
 
 Examples:
-  etoro pi gain MarianoPardo
+  etoro pi gain BigTech
   etoro pi gain trader123 --output json`,
 	Args: cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {

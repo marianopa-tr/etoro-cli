@@ -17,7 +17,7 @@ or users, and create new posts.
 
 Examples:
   etoro feed list --instrument AAPL
-  etoro feed list --username MarianoPardo
+  etoro feed list --username BigTech
   etoro feed post "Bullish on AAPL this quarter!"`,
 }
 
@@ -29,7 +29,7 @@ var feedListCmd = &cobra.Command{
 Examples:
   etoro feed list --instrument AAPL
   etoro feed list --instrument BTC --limit 20
-  etoro feed list --username MarianoPardo`,
+  etoro feed list --username BigTech`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		cfg := mustLoadConfig()
 		if err := cfg.RequireAuth(); err != nil {
