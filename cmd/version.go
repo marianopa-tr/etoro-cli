@@ -8,7 +8,7 @@ import (
 
 // Set via -ldflags at build time; see Makefile.
 var (
-	version = "0.1.0"
+	version = "0.1.1"
 	commit  = "none"
 	date    = "unknown"
 )
