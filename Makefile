@@ -26,6 +26,7 @@ clean:
 
 install: build
 	mkdir -p $(HOME)/.local/bin
+	rm -f $(HOME)/.local/bin/$(BINARY)
 	cp $(BINARY) $(HOME)/.local/bin/$(BINARY)
 	@echo "Installed to $(HOME)/.local/bin/$(BINARY)"
 

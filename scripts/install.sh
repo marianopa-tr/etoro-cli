@@ -161,6 +161,7 @@ fi
 info "Installing to ${install_dir}..."
 tar -xzf "$tmp_dir/$asset" -C "$tmp_dir"
 mkdir -p "$install_dir"
+rm -f "$install_dir/etoro"
 cp "$tmp_dir/etoro" "$install_dir/etoro"
 chmod +x "$install_dir/etoro"
 
