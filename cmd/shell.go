@@ -21,6 +21,12 @@ Examples:
   etoro shell`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		cfg := mustLoadConfig()
+
+		if cfg.Auth.APIKey == "" || cfg.Auth.UserKey == "" {
+			setupCmd.RunE(setupCmd, nil)
+			cfg = mustLoadConfig()
+		}
+
 		client := api.NewClient(cfg, flagDemo)
 		res := resolver.New(client)
 
