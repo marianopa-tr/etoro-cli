@@ -4,6 +4,9 @@
 
 # Build artifacts
 /etoro
-bin/
+/bin/
 dist/
 *.tar.gz
+
+# npm platform binaries (populated by publish.sh, not committed)
+npm/cli-*/bin/

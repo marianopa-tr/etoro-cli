@@ -1,0 +1,53 @@
+#!/usr/bin/env node
+"use strict";
+
+const { execFileSync } = require("child_process");
+const { existsSync } = require("fs");
+const { join } = require("path");
+
+const PLATFORMS = {
+  "darwin-arm64": "@etoro/cli-darwin-arm64",
+  "darwin-x64": "@etoro/cli-darwin-x64",
+  "linux-arm64": "@etoro/cli-linux-arm64",
+  "linux-x64": "@etoro/cli-linux-x64",
+};
+
+function findBinary() {
+  const key = `${process.platform}-${process.arch}`;
+  const pkg = PLATFORMS[key];
+
+  if (!pkg) {
+    console.error(`Unsupported platform: ${key}`);
+    console.error(`Supported: ${Object.keys(PLATFORMS).join(", ")}`);
+    process.exit(1);
+  }
+
+  // Try resolving the platform package (installed as optionalDependency)
+  try {
+    const pkgDir = require.resolve(`${pkg}/package.json`);
+    const binPath = join(pkgDir, "..", "bin", "etoro");
+    if (existsSync(binPath)) return binPath;
+  } catch {}
+
+  // Fallback: check common node_modules locations
+  const candidates = [
+    join(__dirname, "..", "node_modules", pkg, "bin", "etoro"),
+    join(__dirname, "..", "..", pkg, "bin", "etoro"),
+    join(__dirname, "..", "..", "..", pkg, "bin", "etoro"),
+  ];
+  for (const p of candidates) {
+    if (existsSync(p)) return p;
+  }
+
+  console.error(`Could not find the etoro binary for ${key}.`);
+  console.error(`Expected package: ${pkg}`);
+  console.error(`Try: npm install -g etoro-cli`);
+  process.exit(1);
+}
+
+const bin = findBinary();
+try {
+  execFileSync(bin, process.argv.slice(2), { stdio: "inherit" });
+} catch (err) {
+  process.exit(err.status || 1);
+}

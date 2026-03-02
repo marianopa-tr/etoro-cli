@@ -1,0 +1,10 @@
+{
+  "name": "@etoro/cli-linux-arm64",
+  "version": "0.1.1",
+  "description": "eToro CLI binary for Linux arm64",
+  "license": "MIT",
+  "repository": { "type": "git", "url": "https://github.com/etoro/etoro-cli.git" },
+  "os": ["linux"],
+  "cpu": ["arm64"],
+  "files": ["bin/etoro"]
+}

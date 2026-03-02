@@ -1,0 +1,39 @@
+{
+  "name": "etoro-cli",
+  "version": "0.1.1",
+  "description": "eToro CLI — trade, invest, and copy from your terminal",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/etoro/etoro-cli.git"
+  },
+  "homepage": "https://github.com/etoro/etoro-cli",
+  "keywords": [
+    "etoro",
+    "cli",
+    "trading",
+    "stocks",
+    "crypto",
+    "portfolio",
+    "finance"
+  ],
+  "bin": {
+    "etoro": "bin/etoro"
+  },
+  "files": [
+    "bin/"
+  ],
+  "optionalDependencies": {
+    "@etoro/cli-darwin-arm64": "0.1.1",
+    "@etoro/cli-darwin-x64": "0.1.1",
+    "@etoro/cli-linux-arm64": "0.1.1",
+    "@etoro/cli-linux-x64": "0.1.1"
+  },
+  "os": [
+    "darwin",
+    "linux"
+  ],
+  "engines": {
+    "node": ">=14"
+  }
+}
