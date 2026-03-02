@@ -1,5 +1,5 @@
 {
-  "name": "@etoro/cli-darwin-arm64",
+  "name": "etoro-cli-darwin-arm64",
   "version": "0.1.1",
   "description": "eToro CLI binary for macOS arm64",
   "license": "MIT",

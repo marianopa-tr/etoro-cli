@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "agent-device": {
+      "source": "callstackincubator/agent-device",
+      "sourceType": "github",
+      "computedHash": "b10d3427e6fb15db9420e08af6bc41d5512baee761d510d98b6e32490fe081fa"
+    }
+  }
+}

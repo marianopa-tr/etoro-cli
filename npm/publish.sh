@@ -5,7 +5,7 @@ set -euo pipefail
 # Prerequisites:
 #   1. Run `make release` first to produce dist/ tarballs
 #   2. Be logged in to npm: `npm login`
-#   3. The @etoro scope must exist on the npm registry
+#   3. You must own the etoro-cli* package names on npm
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 VERSION=$(node -p "require('${SCRIPT_DIR}/cli/package.json').version")
@@ -34,7 +34,7 @@ tar -xzf "${SCRIPT_DIR}/../dist/etoro_linux_amd64.tar.gz"   -C "${SCRIPT_DIR}/cl
 # Publish platform packages first
 for platform in "${PLATFORMS[@]}"; do
   echo ""
-  echo "Publishing @etoro/${platform}..."
+  echo "Publishing etoro-cli-${platform#cli-}..."
   (cd "${SCRIPT_DIR}/${platform}" && npm publish --access public)
 done
 

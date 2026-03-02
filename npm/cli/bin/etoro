@@ -6,10 +6,10 @@ const { existsSync } = require("fs");
 const { join } = require("path");
 
 const PLATFORMS = {
-  "darwin-arm64": "@etoro/cli-darwin-arm64",
-  "darwin-x64": "@etoro/cli-darwin-x64",
-  "linux-arm64": "@etoro/cli-linux-arm64",
-  "linux-x64": "@etoro/cli-linux-x64",
+  "darwin-arm64": "etoro-cli-darwin-arm64",
+  "darwin-x64": "etoro-cli-darwin-x64",
+  "linux-arm64": "etoro-cli-linux-arm64",
+  "linux-x64": "etoro-cli-linux-x64",
 };
 
 function findBinary() {

@@ -1,5 +1,5 @@
 {
-  "name": "@etoro/cli-linux-arm64",
+  "name": "etoro-cli-linux-arm64",
   "version": "0.1.1",
   "description": "eToro CLI binary for Linux arm64",
   "license": "MIT",
