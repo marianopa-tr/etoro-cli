@@ -3,7 +3,7 @@ set -euo pipefail
 
 # eToro CLI installer
 # Usage:
-#   curl -fsSL https://raw.githubusercontent.com/etoro/etoro-cli/main/scripts/install.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/marianopa-tr/etoro-cli/main/scripts/install.sh | bash
 #
 # Environment overrides:
 #   ETORO_VERSION        Release tag (default: latest)
@@ -14,7 +14,7 @@ set -euo pipefail
 #   ETORO_SKIP_CHECKSUM  Set to 1 to skip SHA256 verification
 
 VERSION="${ETORO_VERSION:-latest}"
-REPO="etoro/etoro-cli"
+REPO="marianopa-tr/etoro-cli"
 BASE_URL="https://github.com/${REPO}/releases"
 CUSTOM_URL="${ETORO_INSTALL_URL:-}"
 SKIP_CHECKSUM="${ETORO_SKIP_CHECKSUM:-0}"
