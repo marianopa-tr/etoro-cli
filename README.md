@@ -2,24 +2,33 @@
 
 Trade, invest, and copy from your terminal. Beautiful colored tables by default, `--output json` everywhere for scripts and AI agents.
 
+[![CI](https://github.com/marianopa-tr/etoro-cli/actions/workflows/ci.yml/badge.svg)](https://github.com/marianopa-tr/etoro-cli/actions/workflows/ci.yml)
+[![npm](https://img.shields.io/npm/v/etoro-cli)](https://www.npmjs.com/package/etoro-cli)
+
 ## Quick Start
+
+### Install via npm (recommended)
+
+```bash
+npm install -g etoro-cli
+```
 
 ### One-liner install (macOS / Linux)
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/etoro/etoro-cli/main/scripts/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/marianopa-tr/etoro-cli/main/scripts/install.sh | bash
 ```
 
 ### Install from source
 
 ```bash
-go install github.com/etoro/etoro-cli@latest
+go install github.com/marianopa-tr/etoro-cli@latest
 ```
 
 ### Build locally
 
 ```bash
-git clone https://github.com/etoro/etoro-cli.git
+git clone https://github.com/marianopa-tr/etoro-cli.git
 cd etoro-cli
 make build      # builds ./etoro with version info
 make install    # copies to ~/.local/bin
@@ -235,6 +244,23 @@ make clean      # remove build artifacts
 make release    # cross-compile tarballs + checksums into dist/
 ```
 
+## Releasing
+
+Releases are fully automated. Push a version tag and CI handles everything:
+
+```bash
+git tag v0.2.0
+git push origin v0.2.0
+```
+
+This will:
+1. Run tests
+2. Cross-compile Go binaries via GoReleaser
+3. Create a GitHub Release with assets and checksums
+4. Publish all npm packages with provenance attestation
+
+**One-time setup:** add an `NPM_TOKEN` secret to the repository (Settings > Secrets and variables > Actions).
+
 ## Project Structure
 
 ```
@@ -245,6 +271,14 @@ internal/
   output/             # Rendering layer (tables + JSON)
   resolver/           # Symbol → instrumentId resolution with cache
   shell/              # Interactive REPL
+npm/
+  cli/                # Meta package (etoro-cli) with platform resolution
+  cli-darwin-arm64/   # macOS Apple Silicon binary
+  cli-darwin-x64/     # macOS Intel binary
+  cli-linux-arm64/    # Linux ARM64 binary
+  cli-linux-x64/      # Linux x64 binary
+  publish.sh          # Manual npm publish script
+  bump-version.sh     # Version bump across all package.json files
 scripts/
   install.sh          # Customer-facing binary installer
 Makefile              # Build, test, release targets
