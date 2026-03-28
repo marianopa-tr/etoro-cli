@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/etoro/etoro-cli/internal/config"
-	"github.com/etoro/etoro-cli/internal/output"
+	"github.com/marianopa-tr/etoro-cli/internal/config"
+	"github.com/marianopa-tr/etoro-cli/internal/output"
 	"github.com/spf13/cobra"
 )
 

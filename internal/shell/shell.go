@@ -8,8 +8,8 @@ import (
 	"strings"
 
 	"github.com/chzyer/readline"
-	"github.com/etoro/etoro-cli/internal/config"
-	"github.com/etoro/etoro-cli/internal/output"
+	"github.com/marianopa-tr/etoro-cli/internal/config"
+	"github.com/marianopa-tr/etoro-cli/internal/output"
 	"github.com/fatih/color"
 )
 

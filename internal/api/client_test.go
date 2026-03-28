@@ -8,7 +8,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/etoro/etoro-cli/internal/config"
+	"github.com/marianopa-tr/etoro-cli/internal/config"
 )
 
 func newTestClient(handler http.HandlerFunc) (*httptest.Server, *Client) {

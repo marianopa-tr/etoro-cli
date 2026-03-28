@@ -8,8 +8,8 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/etoro/etoro-cli/internal/api"
-	"github.com/etoro/etoro-cli/internal/config"
+	"github.com/marianopa-tr/etoro-cli/internal/api"
+	"github.com/marianopa-tr/etoro-cli/internal/config"
 )
 
 func newTestResolver(t *testing.T, handler http.HandlerFunc) (*httptest.Server, *Resolver) {

@@ -4,9 +4,9 @@ import (
 	"reflect"
 	"unsafe"
 
-	"github.com/etoro/etoro-cli/internal/api"
-	"github.com/etoro/etoro-cli/internal/resolver"
-	"github.com/etoro/etoro-cli/internal/shell"
+	"github.com/marianopa-tr/etoro-cli/internal/api"
+	"github.com/marianopa-tr/etoro-cli/internal/resolver"
+	"github.com/marianopa-tr/etoro-cli/internal/shell"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 )

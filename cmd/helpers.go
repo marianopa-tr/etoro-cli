@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/etoro/etoro-cli/internal/api"
+	"github.com/marianopa-tr/etoro-cli/internal/api"
 )
 
 func parseInt(s string) (int, error) {

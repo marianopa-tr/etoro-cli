@@ -9,8 +9,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/etoro/etoro-cli/internal/api"
-	"github.com/etoro/etoro-cli/internal/config"
+	"github.com/marianopa-tr/etoro-cli/internal/api"
+	"github.com/marianopa-tr/etoro-cli/internal/config"
 )
 
 type Resolver struct {

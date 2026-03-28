@@ -10,7 +10,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/etoro/etoro-cli/internal/config"
+	"github.com/marianopa-tr/etoro-cli/internal/config"
 	"github.com/google/uuid"
 )
 

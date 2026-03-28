@@ -1,4 +1,4 @@
-module github.com/etoro/etoro-cli
+module github.com/marianopa-tr/etoro-cli
 
 go 1.22
 

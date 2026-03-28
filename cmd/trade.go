@@ -3,9 +3,9 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/etoro/etoro-cli/internal/api"
-	"github.com/etoro/etoro-cli/internal/output"
-	"github.com/etoro/etoro-cli/internal/resolver"
+	"github.com/marianopa-tr/etoro-cli/internal/api"
+	"github.com/marianopa-tr/etoro-cli/internal/output"
+	"github.com/marianopa-tr/etoro-cli/internal/resolver"
 	"github.com/spf13/cobra"
 )
 

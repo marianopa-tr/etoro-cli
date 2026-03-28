@@ -21,9 +21,9 @@ builds:
       - arm64
     ldflags:
       - -s -w
-      - -X github.com/etoro/etoro-cli/cmd.version={{.Version}}
-      - -X github.com/etoro/etoro-cli/cmd.commit={{.ShortCommit}}
-      - -X github.com/etoro/etoro-cli/cmd.date={{.Date}}
+      - -X github.com/marianopa-tr/etoro-cli/cmd.version={{.Version}}
+      - -X github.com/marianopa-tr/etoro-cli/cmd.commit={{.ShortCommit}}
+      - -X github.com/marianopa-tr/etoro-cli/cmd.date={{.Date}}
 
 archives:
   - format: tar.gz

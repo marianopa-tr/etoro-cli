@@ -1,6 +1,6 @@
 package main
 
-import "github.com/etoro/etoro-cli/cmd"
+import "github.com/marianopa-tr/etoro-cli/cmd"
 
 func main() {
 	cmd.Execute()
