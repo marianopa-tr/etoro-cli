@@ -8,5 +8,6 @@
 dist/
 *.tar.gz
 
-# npm platform binaries (populated by publish.sh, not committed)
-npm/cli-*/bin/
+# npm platform binaries (populated at release time, not committed)
+npm/cli-*/bin/*
+!npm/cli-*/bin/.gitkeep

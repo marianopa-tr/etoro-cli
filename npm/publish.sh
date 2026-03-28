@@ -30,6 +30,14 @@ tar -xzf "${SCRIPT_DIR}/../dist/etoro_darwin_arm64.tar.gz" -C "${SCRIPT_DIR}/cli
 tar -xzf "${SCRIPT_DIR}/../dist/etoro_darwin_amd64.tar.gz"  -C "${SCRIPT_DIR}/cli-darwin-x64/bin/"
 tar -xzf "${SCRIPT_DIR}/../dist/etoro_linux_arm64.tar.gz"   -C "${SCRIPT_DIR}/cli-linux-arm64/bin/"
 tar -xzf "${SCRIPT_DIR}/../dist/etoro_linux_amd64.tar.gz"   -C "${SCRIPT_DIR}/cli-linux-x64/bin/"
+chmod +x "${SCRIPT_DIR}"/cli-*/bin/etoro
+
+# Verify binaries exist
+for platform in "${PLATFORMS[@]}"; do
+  test -x "${SCRIPT_DIR}/${platform}/bin/etoro" || {
+    echo "ERROR: ${platform}/bin/etoro missing or not executable"; exit 1;
+  }
+done
 
 # Publish platform packages first
 for platform in "${PLATFORMS[@]}"; do
