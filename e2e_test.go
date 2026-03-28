@@ -312,22 +312,28 @@ func TestE2E_InvalidCommand(t *testing.T) {
 	_ = stderr
 }
 
-func TestE2E_WatchlistAddRequiresToFlag(t *testing.T) {
+func TestE2E_WatchlistAddRequiresAuth(t *testing.T) {
 	bin := buildCLI(t)
-	_, stderr, code := runCLI(t, bin, "watchlist", "add", "AAPL")
-	if code == 0 {
-		t.Error("expected error when --to flag missing")
+	cmd := exec.Command(bin, "watchlist", "add", "AAPL")
+	cmd.Env = []string{"HOME=" + t.TempDir(), "PATH=" + os.Getenv("PATH")}
+	var stderr bytes.Buffer
+	cmd.Stderr = &stderr
+	err := cmd.Run()
+	if err == nil {
+		t.Error("expected error when no auth configured")
 	}
-	_ = stderr
 }
 
-func TestE2E_WatchlistRemoveRequiresFromFlag(t *testing.T) {
+func TestE2E_WatchlistRemoveRequiresAuth(t *testing.T) {
 	bin := buildCLI(t)
-	_, stderr, code := runCLI(t, bin, "watchlist", "remove", "AAPL")
-	if code == 0 {
-		t.Error("expected error when --from flag missing")
+	cmd := exec.Command(bin, "watchlist", "remove", "AAPL")
+	cmd.Env = []string{"HOME=" + t.TempDir(), "PATH=" + os.Getenv("PATH")}
+	var stderr bytes.Buffer
+	cmd.Stderr = &stderr
+	err := cmd.Run()
+	if err == nil {
+		t.Error("expected error when no auth configured")
 	}
-	_ = stderr
 }
 
 func TestE2E_TradeLimitRequiresPrice(t *testing.T) {
