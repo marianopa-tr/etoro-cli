@@ -7,9 +7,21 @@ on:
 
 permissions:
   contents: write
+  id-token: write
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+      - run: go vet ./...
+      - run: go test -race ./...
+
   goreleaser:
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -30,3 +42,68 @@ jobs:
           args: release --clean
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload dist artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+          retention-days: 1
+
+  npm-publish:
+    needs: goreleaser
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Download dist artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - name: Determine version from tag
+        id: version
+        run: echo "version=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+
+      - name: Bump npm package versions
+        run: ./npm/bump-version.sh "${{ steps.version.outputs.version }}"
+
+      - name: Extract binaries into platform packages
+        run: |
+          tar -xzf dist/etoro_darwin_arm64.tar.gz -C npm/cli-darwin-arm64/bin/
+          tar -xzf dist/etoro_darwin_amd64.tar.gz  -C npm/cli-darwin-x64/bin/
+          tar -xzf dist/etoro_linux_arm64.tar.gz   -C npm/cli-linux-arm64/bin/
+          tar -xzf dist/etoro_linux_amd64.tar.gz   -C npm/cli-linux-x64/bin/
+          chmod +x npm/cli-*/bin/etoro
+
+      - name: Verify extracted binaries
+        run: |
+          for pkg in cli-darwin-arm64 cli-darwin-x64 cli-linux-arm64 cli-linux-x64; do
+            test -x "npm/${pkg}/bin/etoro" || { echo "FATAL: npm/${pkg}/bin/etoro missing or not executable"; exit 1; }
+            echo "  ✓ npm/${pkg}/bin/etoro"
+          done
+
+      - name: Publish platform packages
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          for pkg in cli-darwin-arm64 cli-darwin-x64 cli-linux-arm64 cli-linux-x64; do
+            echo "Publishing etoro-cli-${pkg#cli-}..."
+            (cd "npm/${pkg}" && npm publish --access public --provenance) || true
+          done
+
+      - name: Publish main etoro-cli package
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: cd npm/cli && npm publish --access public --provenance
