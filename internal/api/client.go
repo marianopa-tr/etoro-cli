@@ -168,6 +168,25 @@ func (c *Client) put(path string, body any) ([]byte, error) {
 	return data, nil
 }
 
+func (c *Client) patch(path string, body any) ([]byte, error) {
+	resp, err := c.doRequest("PATCH", path, body)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	data, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, fmt.Errorf("reading response: %w", err)
+	}
+
+	if resp.StatusCode >= 400 {
+		return nil, &APIError{StatusCode: resp.StatusCode, Body: string(data)}
+	}
+
+	return data, nil
+}
+
 func (c *Client) delete(path string) ([]byte, error) {
 	resp, err := c.doRequest("DELETE", path, nil)
 	if err != nil {

@@ -394,6 +394,81 @@ type PostTagInstrument struct {
 	ID int `json:"id"`
 }
 
+// --- Agent Portfolios ---
+
+type CreateAgentPortfolioRequest struct {
+	InvestmentAmountInUsd     float64  `json:"investmentAmountInUsd"`
+	AgentPortfolioName        string   `json:"agentPortfolioName"`
+	AgentPortfolioDescription string   `json:"agentPortfolioDescription,omitempty"`
+	UserTokenName             string   `json:"userTokenName"`
+	ScopeIDs                  []int    `json:"scopeIds"`
+	IPsWhitelist              []string `json:"ipsWhitelist,omitempty"`
+	ExpiresAt                 string   `json:"expiresAt,omitempty"`
+}
+
+type CreateAgentPortfolioResponse struct {
+	AgentPortfolioID             string                         `json:"agentPortfolioId"`
+	AgentPortfolioName           string                         `json:"agentPortfolioName"`
+	AgentPortfolioGCID           int                            `json:"agentPortfolioGcid"`
+	AgentPortfolioVirtualBalance float64                        `json:"agentPortfolioVirtualBalance"`
+	MirrorID                     int                            `json:"mirrorId"`
+	UserTokens                   []CreateAgentPortfolioToken    `json:"userTokens"`
+	UserTokenCreated             *bool                          `json:"userTokenCreated,omitempty"`
+}
+
+type CreateAgentPortfolioToken struct {
+	UserTokenID   string   `json:"userTokenId"`
+	UserToken     string   `json:"userToken"`
+	UserTokenName string   `json:"userTokenName"`
+	ClientID      string   `json:"clientId"`
+	IPsWhitelist  []string `json:"ipsWhitelist"`
+	ScopeIDs      []int    `json:"scopeIds"`
+	ExpiresAt     string   `json:"expiresAt,omitempty"`
+}
+
+type GetAgentPortfoliosResponse struct {
+	AgentPortfolios []AgentPortfolioItem `json:"agentPortfolios"`
+}
+
+type AgentPortfolioItem struct {
+	AgentPortfolioID             string                    `json:"agentPortfolioId"`
+	AgentPortfolioName           string                    `json:"agentPortfolioName"`
+	AgentPortfolioGCID           int                       `json:"agentPortfolioGcid"`
+	AgentPortfolioVirtualBalance float64                   `json:"agentPortfolioVirtualBalance"`
+	MirrorID                     int                       `json:"mirrorId"`
+	CreatedAt                    string                    `json:"createdAt"`
+	UserTokens                   []AgentPortfolioTokenItem `json:"userTokens"`
+}
+
+type AgentPortfolioTokenItem struct {
+	UserTokenID             string   `json:"userTokenId"`
+	UserTokenName           string   `json:"userTokenName"`
+	ClientID                string   `json:"clientId"`
+	ExternalApplicationName string   `json:"externalApplicationName"`
+	IPsWhitelist            []string `json:"ipsWhitelist"`
+	ExpiresAt               string   `json:"expiresAt,omitempty"`
+	ScopeIDs                []int    `json:"scopeIds"`
+	CreatedAt               string   `json:"createdAt"`
+}
+
+type CreateUserTokenRequest struct {
+	UserTokenName string   `json:"userTokenName"`
+	ScopeIDs      []int    `json:"scopeIds"`
+	IPsWhitelist  []string `json:"ipsWhitelist,omitempty"`
+	ExpiresAt     string   `json:"expiresAt,omitempty"`
+}
+
+type CreateUserTokenResponse struct {
+	UserTokenID string `json:"userTokenId"`
+	UserToken   string `json:"userToken"`
+}
+
+type UpdateUserTokenRequest struct {
+	ScopeIDs     []int    `json:"scopeIds,omitempty"`
+	IPsWhitelist []string `json:"ipsWhitelist,omitempty"`
+	ExpiresAt    string   `json:"expiresAt,omitempty"`
+}
+
 // --- User Profile ---
 
 type UserProfileResponse struct {
