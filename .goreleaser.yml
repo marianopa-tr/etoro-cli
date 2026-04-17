@@ -29,7 +29,7 @@ archives:
   - name_template: "{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}"
     formats:
       - tar.gz
-    overrides:
+    format_overrides:
       - goos: windows
         formats:
           - zip
