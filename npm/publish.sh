@@ -13,7 +13,14 @@ VERSION=$(node -p "require('${SCRIPT_DIR}/cli/package.json').version")
 echo "Publishing etoro-cli v${VERSION}"
 echo ""
 
-PLATFORMS=("cli-darwin-arm64" "cli-darwin-x64" "cli-linux-arm64" "cli-linux-x64")
+PLATFORMS=(
+  "cli-darwin-arm64"
+  "cli-darwin-x64"
+  "cli-linux-arm64"
+  "cli-linux-x64"
+  "cli-windows-arm64"
+  "cli-windows-x64"
+)
 
 for platform in "${PLATFORMS[@]}"; do
   dir="${SCRIPT_DIR}/${platform}"
@@ -30,12 +37,20 @@ tar -xzf "${SCRIPT_DIR}/../dist/etoro_darwin_arm64.tar.gz" -C "${SCRIPT_DIR}/cli
 tar -xzf "${SCRIPT_DIR}/../dist/etoro_darwin_amd64.tar.gz"  -C "${SCRIPT_DIR}/cli-darwin-x64/bin/"
 tar -xzf "${SCRIPT_DIR}/../dist/etoro_linux_arm64.tar.gz"   -C "${SCRIPT_DIR}/cli-linux-arm64/bin/"
 tar -xzf "${SCRIPT_DIR}/../dist/etoro_linux_amd64.tar.gz"   -C "${SCRIPT_DIR}/cli-linux-x64/bin/"
-chmod +x "${SCRIPT_DIR}"/cli-*/bin/etoro
+unzip -o "${SCRIPT_DIR}/../dist/etoro_windows_arm64.zip"    -d "${SCRIPT_DIR}/cli-windows-arm64/bin/" >/dev/null
+unzip -o "${SCRIPT_DIR}/../dist/etoro_windows_amd64.zip"    -d "${SCRIPT_DIR}/cli-windows-x64/bin/"  >/dev/null
+chmod +x "${SCRIPT_DIR}"/cli-darwin-*/bin/etoro "${SCRIPT_DIR}"/cli-linux-*/bin/etoro
 
 # Verify binaries exist
 for platform in "${PLATFORMS[@]}"; do
-  test -x "${SCRIPT_DIR}/${platform}/bin/etoro" || {
-    echo "ERROR: ${platform}/bin/etoro missing or not executable"; exit 1;
+  if [[ "${platform}" == cli-windows-* ]]; then
+    bin_name="etoro.exe"
+  else
+    bin_name="etoro"
+  fi
+  bin_path="${SCRIPT_DIR}/${platform}/bin/${bin_name}"
+  test -f "${bin_path}" || {
+    echo "ERROR: ${bin_path} missing"; exit 1;
   }
 done
 

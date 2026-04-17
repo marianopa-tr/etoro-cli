@@ -1,0 +1,25 @@
+{
+  "name": "etoro-cli-windows-arm64",
+  "version": "0.2.0",
+  "description": "eToro CLI binary for Windows arm64",
+  "author": "marianopa-tr",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/marianopa-tr/etoro-cli.git"
+  },
+  "homepage": "https://github.com/marianopa-tr/etoro-cli#readme",
+  "bugs": {
+    "url": "https://github.com/marianopa-tr/etoro-cli/issues"
+  },
+  "os": [
+    "win32"
+  ],
+  "cpu": [
+    "arm64"
+  ],
+  "files": [
+    "bin/etoro.exe"
+  ],
+  "preferUnplugged": true
+}

@@ -10,7 +10,11 @@ const PLATFORMS = {
   "darwin-x64": "etoro-cli-darwin-x64",
   "linux-arm64": "etoro-cli-linux-arm64",
   "linux-x64": "etoro-cli-linux-x64",
+  "win32-arm64": "etoro-cli-windows-arm64",
+  "win32-x64": "etoro-cli-windows-x64",
 };
+
+const BINARY_NAME = process.platform === "win32" ? "etoro.exe" : "etoro";
 
 function resolveSymlinks(p) {
   const visited = new Set();
@@ -39,7 +43,7 @@ function findBinary() {
     process.exit(1);
   }
 
-  const binRel = join("bin", "etoro");
+  const binRel = join("bin", BINARY_NAME);
 
   const searchRoots = [__dirname, process.cwd()];
   try {

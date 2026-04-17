@@ -41,6 +41,10 @@ release: clean
 		tar -czf dist/etoro_linux_amd64.tar.gz  -C dist etoro && rm dist/etoro
 	GOOS=linux   GOARCH=arm64 go build -ldflags "$(LDFLAGS)" -o dist/etoro . && \
 		tar -czf dist/etoro_linux_arm64.tar.gz  -C dist etoro && rm dist/etoro
-	@cd dist && shasum -a 256 *.tar.gz > checksums.txt
+	GOOS=windows GOARCH=amd64 go build -ldflags "$(LDFLAGS)" -o dist/etoro.exe . && \
+		(cd dist && zip -q etoro_windows_amd64.zip etoro.exe) && rm dist/etoro.exe
+	GOOS=windows GOARCH=arm64 go build -ldflags "$(LDFLAGS)" -o dist/etoro.exe . && \
+		(cd dist && zip -q etoro_windows_arm64.zip etoro.exe) && rm dist/etoro.exe
+	@cd dist && shasum -a 256 *.tar.gz *.zip > checksums.txt
 	@echo "Release artifacts in dist/"
 	@ls -lh dist/

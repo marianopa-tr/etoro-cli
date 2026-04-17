@@ -19,6 +19,8 @@ PACKAGES=(
   "cli-darwin-x64"
   "cli-linux-arm64"
   "cli-linux-x64"
+  "cli-windows-arm64"
+  "cli-windows-x64"
 )
 
 for pkg in "${PACKAGES[@]}"; do

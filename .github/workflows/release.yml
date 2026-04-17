@@ -85,7 +85,9 @@ jobs:
           tar -xzf dist/etoro_darwin_amd64.tar.gz  -C npm/cli-darwin-x64/bin/
           tar -xzf dist/etoro_linux_arm64.tar.gz   -C npm/cli-linux-arm64/bin/
           tar -xzf dist/etoro_linux_amd64.tar.gz   -C npm/cli-linux-x64/bin/
-          chmod +x npm/cli-*/bin/etoro
+          unzip -o dist/etoro_windows_arm64.zip    -d npm/cli-windows-arm64/bin/
+          unzip -o dist/etoro_windows_amd64.zip    -d npm/cli-windows-x64/bin/
+          chmod +x npm/cli-darwin-*/bin/etoro npm/cli-linux-*/bin/etoro
 
       - name: Verify extracted binaries
         run: |
@@ -93,12 +95,16 @@ jobs:
             test -x "npm/${pkg}/bin/etoro" || { echo "FATAL: npm/${pkg}/bin/etoro missing or not executable"; exit 1; }
             echo "  ✓ npm/${pkg}/bin/etoro"
           done
+          for pkg in cli-windows-arm64 cli-windows-x64; do
+            test -f "npm/${pkg}/bin/etoro.exe" || { echo "FATAL: npm/${pkg}/bin/etoro.exe missing"; exit 1; }
+            echo "  ✓ npm/${pkg}/bin/etoro.exe"
+          done
 
       - name: Publish platform packages
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          for pkg in cli-darwin-arm64 cli-darwin-x64 cli-linux-arm64 cli-linux-x64; do
+          for pkg in cli-darwin-arm64 cli-darwin-x64 cli-linux-arm64 cli-linux-x64 cli-windows-arm64 cli-windows-x64; do
             echo "Publishing etoro-cli-${pkg#cli-}..."
             (cd "npm/${pkg}" && npm publish --access public --provenance) || true
           done

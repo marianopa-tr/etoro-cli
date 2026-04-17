@@ -29,6 +29,8 @@ Every command supports `--output json` for machine-readable output.
 | etoro-cli-darwin-x64 | macOS | Intel |
 | etoro-cli-linux-arm64 | Linux | ARM64 |
 | etoro-cli-linux-x64 | Linux | x86_64 |
+| etoro-cli-windows-arm64 | Windows | ARM64 |
+| etoro-cli-windows-x64 | Windows | x86_64 |
 
 The correct binary is selected automatically at install time via `optionalDependencies`.
 

@@ -277,6 +277,8 @@ npm/
   cli-darwin-x64/     # macOS Intel binary
   cli-linux-arm64/    # Linux ARM64 binary
   cli-linux-x64/      # Linux x64 binary
+  cli-windows-arm64/  # Windows ARM64 binary
+  cli-windows-x64/    # Windows x64 binary
   publish.sh          # Manual npm publish script
   bump-version.sh     # Version bump across all package.json files
 scripts/

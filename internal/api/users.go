@@ -67,6 +67,24 @@ func (c *Client) GetUserTradeInfo(username, period string) (*TradeInfoResponse, 
 	return &resp, nil
 }
 
+type IdentityResponse struct {
+	GCID    int `json:"gcid"`
+	RealCID int `json:"realCid"`
+	DemoCID int `json:"demoCid"`
+}
+
+func (c *Client) GetIdentity() (*IdentityResponse, error) {
+	data, err := c.get("/api/v1/me", nil)
+	if err != nil {
+		return nil, err
+	}
+	var resp IdentityResponse
+	if err := json.Unmarshal(data, &resp); err != nil {
+		return nil, fmt.Errorf("parsing identity response: %w", err)
+	}
+	return &resp, nil
+}
+
 func (c *Client) GetPeople() (json.RawMessage, error) {
 	data, err := c.get("/api/v1/user-info/people", nil)
 	if err != nil {
