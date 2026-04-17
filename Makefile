@@ -1,6 +1,6 @@
 BINARY   := etoro
 MODULE   := github.com/marianopa-tr/etoro-cli
-VERSION  := $(shell git describe --tags --dirty 2>/dev/null || echo 0.1.1)
+VERSION  := $(shell git describe --tags --dirty 2>/dev/null || echo 0.2.0)
 COMMIT   := $(shell git rev-parse --short HEAD 2>/dev/null || echo none)
 DATE     := $(shell date -u +%Y-%m-%dT%H:%M:%SZ)
 
